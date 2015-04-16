@@ -11,11 +11,27 @@
 
 <body>
 
-<ul class="nav nav-pills" style="position: absolute;right: 10%;padding:20px; margin-top: 10px">
-    <li role="presentation"><a href="#/home">Home</a></li>
-    <li role="presentation" class="active"><a href="#/profile">Profile</a></li>
-    <li role="presentation"><a href="#">Messages<span class="badge">99</span></a></li>
-</ul>
+<nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+      <div class="navbar-header">
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="#">FriendQuick</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+         <ul class="nav navbar-nav">
+            <li><a href="#/home">Home</a></li>
+            <li class="active"><a href="#/profile">Profile</a></li>
+            <li><a href="#/friends">Friends</a></li>
+            <li><a href="#/notifications">Notifications</a></li>
+            <li><a href="#/messages">Messages</a></li>
+         </ul>
+      </div>
+   </div>
+</nav>
 
 <div id="container" >
 	<div id="header">
@@ -126,8 +142,9 @@
       <div class="box2 margin1 grad1">
    <div class="box2-top"><div></div></div>
       <div class="box2-content">
-      <div class="fill"><img src="./profile_files/icon1.png" alt="icon1" width="26" height="28" class="icon1"> <a href="./profile_files/profile.html" class="link1">Fill out Your profile</a></div>
-      <p class="contact">Contact info <a href="./profile_files/profile.html" class="edit">[edit]</a></p>
+      <div class="fill"><img src="./profile_files/icon1.png" alt="icon1" width="26" height="28" class="icon1"> <a href="#/profileinfo" class="link1">Fill out Your profile</a></div>
+      <p class="contact">Contact info <a href="#/contactinfo" class="edit">[edit]</a></p>
+
       <div class="hr"></div>
       <p class="contact"><span class="info">Email:</span> <a href="./profile_files/profile.html" class="edit nopadding">kbhatt@scu.edu</a></p>
       <p class="contact"><span class="info">Web:</span> <a href="./profile_files/profile.html" class="edit nopadding">kbhatt.com</a></p>
@@ -159,13 +176,25 @@
 <!--</div>-->
                
       </div>
-   <div class="box-bottom"><div></div></div>
-</div>
+  <!-- <div class="box-bottom"><div></div></div>
+</div>-->
     
     
     </div>
 
 </div>
 
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+   <div class="container-fluid">
+
+      <div>
+         <ul class="nav navbar-nav">
+            <li><a href="#/about">About Us</a></li>
+            <li><a href="#/privacy">Privacy</a></li>
+            <li><a href="#/contact">Contact Us</a></li>
+         </ul>
+      </div>
+   </div>
+</nav>
 
 </body></html>
