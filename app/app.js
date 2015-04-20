@@ -20,7 +20,19 @@ angular.module('myApp', ['ngRoute', 'QF_controllers'])
             controller: 'HomeCtrl'
         })
         .when('/profile', {
-            templateUrl: 'profile.html'
+            templateUrl: 'profile.html',
+            controller: 'HomeCtrl'
+        })
+        .when('/search', {
+            templateUrl: 'views/search.html'
+            //controller: 'HomeCtrl'
+        })
+        .when('/profileinfo', {
+            templateUrl: 'views/profileinfo.html'
+            //controller: 'HomeCtrl'
+        })
+        .when('/contactinfo', {
+            templateUrl: 'views/contactinfo.html'
             //controller: 'HomeCtrl'
         })
         .otherwise({

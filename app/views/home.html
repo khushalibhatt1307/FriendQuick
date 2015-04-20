@@ -1,58 +1,182 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/bower_components/jquery/dist/jquery.min.js">
+    <!--<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/bower_components/jquery/dist/jquery.min.js">-->
+<!--
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-
+-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <title>Home</title>
+
 
 </head>
 <body ng-controller="HomeCtrl">
 
-        <p>  Hello {{ name }}           <a ng-click="facebook_logout()">Log out</a></p>
-    <div>
-        <ul class="nav nav-pills" style="position: absolute;right: 10%">
-            <li role="presentation" class="active"><a href="#/home">Home</a></li>
-            <li role="presentation"><a href="#/profile">Profile</a></li>
-            <li role="presentation"><a href="#">Messages<span class="badge">99</span></a></li>
-        </ul>
+<p>  Hello {{ name }}           <a ng-click="facebook_logout()">Log out</a></p>
+<!--<div>
+    <ul class="nav nav-pills" style="position: absolute;right: 10%">
+        <li role="presentation" class="active"><a href="#/home">Home</a></li>
+        <li role="presentation"><a href="#/profile">Profile</a></li>
+        <li role="presentation"><a href="#/friends">Friends</a></li>
+        <li role="presentation"><a href="#notifications">Notifications<span class="badge">3</span></a></li>
+        <li role="presentation"><a href="#messages">Messages<span class="badge">10</span></a></li>
+    </ul>
+</div>-->
+<!--<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+          &lt;!&ndash;  <a class="navbar-brand" href="#">WebSiteName</a>&ndash;&gt;
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+           <ul class="navbar-nav nav" style="position: absolute;right: 10%">
+                <li role="presentation" class="active"><a href="#/home">Home</a></li>
+                <li role="presentation"><a href="#/profile">Profile</a></li>
+                <li role="presentation"><a href="#/friends">Friends</a></li>
+                <li role="presentation"><a href="#notifications">Notifications<span class="badge">3</span></a></li>
+                <li role="presentation"><a href="#messages">Messages<span class="badge">10</span></a></li>
+            </ul>
+        </div>
+    </nav>-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">FriendQuick</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#/home">Home</a></li>
+                <li><a href="#/profile">Profile</a></li>
+                <li><a href="#/friends">Friends</a></li>
+                <li><a href="#/notifications">Notifications</a></li>
+                <li><a href="#/messages">Messages</a></li>
+            </ul>
+         </div>
     </div>
+</nav>
+
 <div style="margin-top: 70px">
         <h1 class="text-center" style="margin-bottom: 50px; display: block">Welcome to FriendQuick!</h1>
 
+   <!-- <div class="row">
+        <div class="col-xs-6" style="margin: auto;float: none">
+            <div class="input-group">
+                <input type="text" class="form-control" aria-label="...">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Go <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                    </ul> -->
+            <!--    </div><!-- /btn-group -->
+         <!--   </div><!-- /input-group -->
+       <!-- </div><!-- /.col-lg-6 -->
+  <!--  </div><!-- /.row -->
 
-        <div class="row">
-            <div class="col-xs-6" style="margin: auto;float: none">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="...">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Go <span class="caret"></span></button>
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div><!-- /btn-group -->
-                </div><!-- /input-group -->
-            </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
+    <!--<div style="height: 100px">
 
-
-    <div style="height: 100px">
-
-
+    </div> -->
 
 
-    </div>
+   <!-- <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-1" for="Location">Location:</label>
+            <div class="col-sm-5">
+                <input type="zipcode" class="form-control" id="zipcode" placeholder="Enter zipcode">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-1" for="interest">Interest:</label>
+            <div class="col-sm-5">
+                <input type="intrest" class="form-control" id="interest" placeholder="Enter interest">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-5">
+                <div class="checkbox">
+                    <label><input type="checkbox"> Set My Current Location</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-5">
+                <!--<button type="search" class="btn btn-default">Search</button> -->
+          <!--      <a href="#/search" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
 
 
+    </form> -->
 
+    <style type="text/css">
+        .bs-example{
+            margin: 20px;
+        }
+        /* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+        .form-horizontal .control-label{
+            padding-top: 7px;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="bs-example">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="zipcode" class="control-label col-xs-2">Zipcode</label>
+                <div class="col-xs-10">
+                    <input type="zipcode" class="form-control" id="zipcode" placeholder="Zipcode">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="interest" class="control-label col-xs-2">Interest</label>
+                <div class="col-xs-10">
+                    <input type="interest" class="form-control" id="interest" placeholder="Interest">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Set My Current Location</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                   <a href="#/search" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> Search</a>
+                </div>
+            </div>
+        </form>
 
-</div>
+              <nav class="navbar navbar-inverse navbar-fixed-bottom">
+                  <div class="container-fluid">
 
-
-</body>
-</html>
+                      <div>
+                          <ul class="nav navbar-nav">
+                              <li><a href="#/about">About Us</a></li>
+                              <li><a href="#/privacy">Privacy</a></li>
+                              <li><a href="#/contact">Contact Us</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
+          </div>
+          </body>
+          </html>
