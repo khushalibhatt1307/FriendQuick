@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<script type = "text/javascript" src = "myProfile.js">
+
+</script>
+<body onload = "saySomething"("I am fine")">
+
+
+<div class="container" style="padding-top: 60px;">
+    <h1 class="page-header">My Profile</h1>
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="text-center">
+                <!--<img class="img-responsive" src="person_image.jpg" alt="person_image"> -->
+                <!--<img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar"> -->
+                <img src="Person_image.jpg"  alt="image" class="avatar img-circle img-thumbnail">
+               <!-- <img class="img-responsive" src="img_chania.jpg" alt="Chania" width="460" height="345"> -->
+                <h6>Upload a different photo...</h6>
+                <input type="file" class="text-center center-block well well-sm">
+                <span></span>
+                <input class="btn btn-primary" value="Submit" type="button">
+            </div>
+        </div>
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+
+            <!--<div class="alert alert-info alert-dismissable">
+                <a class="panel-close close" data-dismiss="alert">×</a>
+                <i class="fa fa-coffee"></i>
+                This is an <strong>.alert</strong>. Use this to show important messages to the user.
+            </div> -->
+
+            <h3>Personal info
+                <input class="btn btn-primary" value="Edit" type="button" style="float: right">
+            </h3>
+            <!--<input class="btn btn-primary" value="Edit" type="button" style="float: right"> -->
+
+            <form id = "profileForm" class="form-horizontal" role="form">
+                <fieldset>
+                <div class="form-group">
+                    <label for = "Name:" class="col-lg-3 control-label">Name:</label>
+                    <div class="col-lg-8">
+                        <input id = "Name:" class="form-control" value="Ashwini" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Interests:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="Volleyball, Swimming" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Address:</label>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Street:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="160 Locksunart Way" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">State:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="California" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Country:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="USA" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Zip:</label>
+                    <div class="col-lg-8">
+                        <input class="form-control" value="94087" type="text">
+                    </div>
+                </div>
+
+               <!-- <div class="form-group">
+                    <label class="col-lg-3 control-label">Time Zone:</label>
+                    <div class="col-lg-8">
+                        <div class="ui-select">
+                            <select id="user_time_zone" class="form-control">
+                                <option value="Hawaii">(GMT-10:00) Hawaii</option>
+                                <option value="Alaska">(GMT-09:00) Alaska</option>
+                                <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                                <option value="Arizona">(GMT-07:00) Arizona</option>
+                                <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                                <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                                <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                                <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Username:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" value="janeuser" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" value="11111122333" type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Confirm password:</label>
+                    <div class="col-md-8">
+                        <input class="form-control" value="11111122333" type="password">
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                        <input class="btn btn-primary" value="Save Changes" type="button">
+                        <span></span>
+                        <input class="btn btn-default" value="Cancel" type="reset">
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
