@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My AngularJS App</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="/bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="/bower_components/html5-boilerplate/css/main.css">
   <link href="./profile_files/style.css" rel="stylesheet" type="text/css">
@@ -20,7 +20,41 @@
   <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">FriendQuick</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#/home">Home</a></li>
+        <li><a href="#/profile">Profile</a></li>
+        <li><a href="#/friends">Friends</a></li>
+        <li><a href="#/notifications">Notifications</a></li>
+        <li><a href="#/messages">Messages</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
   <div ng-view></div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a href="#/about">About Us</a></li>
+          <li><a href="#/privacy">Privacy</a></li>
+          <li><a href="#/contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <script src="/bower_components/angular/angular.js?ver="></script>
   <script src="/bower_components/angular-route/angular-route.js"></script>
