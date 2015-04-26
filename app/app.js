@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', ['ngRoute', 'QF_controllers'])
+angular.module('myApp', ['ngRoute', 'QF_controllers' ])
 
 .config(['$routeProvider', function($routeProvider) {
 
@@ -27,9 +27,9 @@ angular.module('myApp', ['ngRoute', 'QF_controllers'])
             templateUrl: 'views/search.html'
             //controller: 'HomeCtrl'
         })
-        .when('/profileinfo', {
-            templateUrl: 'views/profileinfo.html'
-            //controller: 'HomeCtrl'
+        .when('/addProfile', {
+            templateUrl: 'addProfile.html'
+            //controller: 'addProfileCtrl'
         })
         .when('/contactinfo', {
             templateUrl: 'views/contactinfo.html'
