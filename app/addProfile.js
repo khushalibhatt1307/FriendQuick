@@ -2,8 +2,8 @@
  * Created by Ashwini on 4/18/2015.
  */
 'use strict';
-
-angular.module("myApp", ["ngRoute", "firebase" ])
+//inject angular file upload directives and services.
+angular.module("myApp",["ngRoute", "firebase"])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/addProfile', {
@@ -12,65 +12,146 @@ angular.module("myApp", ["ngRoute", "firebase" ])
         });
     }])
 
-
-.controller('addProfileCtrl', ["$scope", function($scope, $firebase) {
-       // .controller('addProfileCtrl', ['$scope', function($scope) {
-   // $scope.addProfile = function() {
+//If it is own profile edit, submit, upload photo button are enabled but if it is just view profile are buttons should be disabled.
+.controller('addProfileCtrl', ["$scope", "$firebase", function($scope,  $firebase ) {
+        // .controller('addProfileCtrl', ['$scope', function($scope) {
+        // $scope.addProfile = function() {
         //$scope.master = {};
-        //Initialization
-        $scope.init = function() {
-            //if ($routeParams.Id) {
-            //if (true) {
-                //get an existing object
-                var ref = new Firebase("https://quickfriend.firebaseio.com/");
-                var usersRef = ref.child("users/Hrishi");
-                usersRef.once("value", function(snapshot) {
-                    //console.log(snapshot.val());
-                   // alert("Data loaded successfully.");
-                    var val = snapshot.val();
-                    console.log(val.Interests);
-                    $scope.user.Interests = val.Interests;
-                    $scope.user.Street = val.Street;
-                    $scope.user.City = val.City;
-                    $scope.user.State = val.State;
-                    $scope.user.Country = val.Country;
-                    $scope.user.Zip   = val.Zipcode;
-                    $scope.user.Name = "Hrishi";
-                }, function (errorObject) {
-                    console.log("The read failed: " + errorObject.code);
-                });
+        $scope.visibleSubmit = true;
+        $scope.visibleReset = true;
+        $scope.disableEdit  = false;
 
-          //  } else {
-                //create a new object
-          //      $scope.master = {};
-         //   }
-          //  $scope.isSaving = false;
+         function getPicture (onSuccess, onFail) {
+            var input = document.createElement('input');
+            input.type = 'file';
+             console.log( "I am in getpicture function");
+            input.addEventListener('change', function (evt) {
+
+                var files = evt.target.files;
+
+                if (files.length < 1)
+                    onFail('Error loading file');
+
+                var fileToLoad = files[0];
+                var fileReader = new FileReader();
+
+                fileReader.onload = function (fileLoadedEvent) {
+                    var data = fileLoadedEvent.target.result;
+                    onSuccess(data.split(',')[1]);
+
+                }
+
+                fileReader.readAsDataURL(fileToLoad);
+
+            });
+             input.click();
         }
-        $scope.init();
-         alert("Init called successfully.");
+
+        $scope.uploadFile = function() {
+
+            $scope.newReportImageData = null;
+
+            var onSuccess = function(imageData) {
+                //console.log(imageData);
+                console.log( "I am in upload function");
+                $scope.newProfileImageData = "data:image/jpeg;base64," + imageData;
+                $scope.$apply();
+            }
+
+            var onFail = function(message) {
+                alert('Failed because: ' + message);
+            }
+
+            //getPicture(onSuccess, onFail, { quality: 25, targetWidth: 1000});
+            getPicture(onSuccess, onFail, { quality: 50, targetWidth: 1000});
+                //destinationType: Camera.DestinationType.DATA_URL
+       // });
+        };
+
+        $scope.uploadFile();
+        //enable edits
+        $scope.editProfile = function() {
+            $scope.disableEdit   = false;
+            $scope.visibleSubmit = true;
+            $scope.visibleReset  = true;
+            console.log ("I am in editProfile function");
+        };
+        $scope.editProfile();
+
+        function init() {
+               //Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
+                var userId ="Ashwini@gmaildotcom";
+                var FirebaseURL ="https://quickfriend.firebaseio.com/";
+                var root = "users/";
+                var FirebaseRef = new Firebase(FirebaseURL);
+                var FirebaseUsrRef  = FirebaseRef.child (root);
+                var FirebaseSync = $firebase(FirebaseUsrRef);
+
+                var list =FirebaseSync.$asArray();
+                $scope.list = list;
+                //console.log(list);
+               // Note that the data will not be available immediately since retrieving it is an asynchronous operation.
+               // You can use the $loaded() promise to get notified when the data has loaded.
+               list.$loaded().then(function(array) {
+                var userId_got = list.$getRecord("Ashwini@gmaildotcom");
+                console.log (userId_got);
+                if ( userId_got != null) {
+                    $scope.visibleSubmit = false;
+                    $scope.visibleReset = false;
+                    $scope.disableEdit = true;
+                    $scope.user.City = userId_got.City;
+                    $scope.user.Country = userId_got.Country;
+                    $scope.user.Interests = userId_got.Interests;
+                    $scope.user.State = userId_got.State  ;
+                    $scope.user.Street = userId_got.Street ;
+                    $scope.user.Zip = userId_got.Zip;
+                    $scope.user.Name = userId_got.Name;
+                    $scope.newProfileImageData =userId_got.imageData;
+                } else {
+                    //console.log("I am in else");
+                    $scope.visibleSubmit = true;
+                    $scope.visibleReset = true;
+                    $scope.disableEdit = false;
+                    $scope.user.City = "Your City";
+                    $scope.user.Country = "Your Country";
+                    $scope.user.Interests = "Your Interests";
+                    $scope.user.State = "Your State";
+                    $scope.user.Street = "Your Street";
+                    $scope.user.Zip = "Your ZIP";
+                    $scope.user.Name = "Your Name";
+                    $scope.newProfileImageData =null;
+                }
+            });
+        }
+        init();
+
        //Update form
        $scope.update = function(user) {
+
            $scope.master = angular.copy(user);
            console.log($scope.user.Name);
 
            var ref = new Firebase("https://quickfriend.firebaseio.com/");
-           var userName = $scope.user.Name;
+           var userId = "Ashwini@gmaildotcom";
            var root = "users/";
-           var usersRef  = ref.child (root.concat(userName));
+           var usersRef  = ref.child (root.concat(userId));
            var Interests  = $scope.user.Interests;
            var Street    = $scope.user.Street;
            var City      = $scope.user.City;
-           var State      = $scope.user.State;
+           var State     = $scope.user.State;
            var Country   = $scope.user.Country;
-           var Zip   = $scope.user.Zip;
+           var Zip       = $scope.user.Zip;
+           var imageData = $scope.newProfileImageData;
            usersRef.set({
                 //userName : {
+                   Name     : $scope.user.Name,
                    Interests: Interests,
-                   Street  : Street,
-                   City    : City,
-                   State   : State,
-                   Country : Country,
-                   Zipcode :Zip
+                   Street   : Street,
+                   City     : City,
+                   State    : State,
+                   Country  : Country,
+                   Zip      :Zip,
+                   imageData : imageData
                    // }
                },
                function(error) {
@@ -80,6 +161,9 @@ angular.module("myApp", ["ngRoute", "firebase" ])
                       // alert("Data saved successfully.");
                    }
                });
+           $scope.visibleSubmit = false;
+           $scope.visibleReset = false;
+           $scope.disableEdit = true;
       };
         //RESET FORM FUNCTION
         $scope.resetForm = function() {
@@ -88,82 +172,8 @@ angular.module("myApp", ["ngRoute", "firebase" ])
         };
         $scope.resetForm();
 
-        //console.log($scope.name);
-        var ref = new Firebase("https://quickfriend.firebaseio.com/");
-        //var usersRef = ref.child("users/");
-        //var usersRef = ref.child("users/Ashwini_Nalage");
-        //////////////////Record Save //////////////////////////
-        //var userName = $scope.user.Name;
-/*
-       usersRef.set({
-           // $userName : {
-              // {
-                Interest: "Swimming",
-                Street  : " 160 Locksunart way",
-                City: "Sunnyvale",
-                Country: "USA",
-                Zipcode:"94087"
-              //  }
-            },
-            function(error) {
-            if (error) {
-                alert("Data could not be saved." + error);
-            } else {
-                alert("Data saved successfully.");
-            }
-        });  */
-     // newUserRef is push ID
-     /* var newUserRef =  usersRef.push({
-                Chandra_Nalage: {
-                    Interest: "Swimming",
-                    Street  : " 160 Locksunart way",
-                    City: "Sunnyvale",
-                    Country: "USA",
-                    Zipcode:"94087"
-                }
-            },
-            function(error) {
-                if (error) {
-                    alert("Data could not be saved." + error);
-                } else {
-                    alert("Data saved successfully.");
-                }
-            });
-        //get the unique ID generated by push
-        var postID = newUserRef.key();
-        console.log(postID); */
 
-        /////////////////////Record update///////////////////////////
-       /*var usersRef = ref.child("users/Ashwini_Nalage");
-        usersRef.update({
-            Zipcode:"94089"
-        }); */
 
-         /////////////////////Read Existing Records/////////////////////////////////////
-        // Get a reference to our posts
-        //var ref = new Firebase("https://quickfriend.firebaseio.com/");
-       // Attach an asynchronous callback to read the data at our posts reference
-        var usersRef = ref.child("users/Ashwini_Nalage");
-        usersRef.once("value", function(snapshot) {
-            console.log(snapshot.val());
-        }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
-
-       /* ref.on("value", function(snapshot) {
-            console.log(snapshot.val());
-        }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        }); */
-
-       // var usersRef = ref.child("users");
-       // var fredFirstNameRef = fredRef.child('users/Chandra_Nalage');
-       // var path = fredFirstNameRef.toString();
-        //ref.orderByChild("User").on("child_added", function(snapshot) {
-        //   console.log(snapshot.key() + " was " + snapshot.val().City + "");
-        //});
-
-    //}
 }]);
 
 

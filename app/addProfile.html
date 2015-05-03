@@ -5,48 +5,50 @@
     <title> addProfile </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-    <script type = "text/javascript" src = "addProfile.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+    <script type = "text/javascript" src = "addProfile_5315.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script> -->
 </head>
 <!--ng-app="myApp" ng-init="init()"-->
-<body  ng-controller ="addProfileCtrl" >
+<body >
 
-<div class="container" style="padding-top: 60px;">
-    <h1 class="page-header">Add Profile</h1>
-    <div class="row">
+<div  ng-controller ="addProfileCtrl"  class="container" style="padding-top: 60px;">
+    <h1 class="page-header">My Profile</h1>
+    <div class="row" name="1">
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="text-center">
-                <!--<img class="img-responsive" src="person_image.jpg" alt="person_image"> -->
-                <!--<img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar"> -->
-                <img src="Person_image.jpg"  alt="image" class="avatar img-circle img-thumbnail">
-               <!-- <img class="img-responsive" src="img_chania.jpg" alt="Chania" width="460" height="345"> -->
-                <h6>Upload a different photo...</h6>
-                <input type="file" class="text-center center-block well well-sm">
+            <div class="text-center" name ="picDiv">
+               <!--image upload-->
+                <h6 ng-hide="newProfileImageData"> Upload a Photo...   </h6>
+                <!--accept="image/*" specify that the server accepts only image files in the file upload-->
+                <!--<input type="file"  ngf-select="" ng-model="ImageData" name="newProfileImageData" accept="image/*" class="text-center center-block well well-sm" required="">-->
+                <img style="max-width: 80%; " alt="" ng-src="{{ newProfileImageData }}" ng-show="newProfileImageData" alt="image" />
                 <span></span>
-                <input class="btn btn-primary" value="Submit" type="button">
+
+                <!--ng-disabled="!picDiv.name.$valid"-->
+                <button  ng-click="uploadFile()" class="btn btn-primary"  ng-hide="disableEdit"> Upload Image</button>
             </div>
         </div>
         <!-- edit form column -->
         <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
 
             <h3>Personal info
-                <input class="btn btn-primary" value="Edit" type="button" style="float: right">
+                <input class="btn btn-primary"  value="Edit" ng-click="editProfile()" ng-disabled= "!disableEdit" type="button" style="float: right">
             </h3>
 
-<!--FORM  ng-submit="AddProfile()"-->
-            <form editable-form novalidate id = "profileForm" class="form-horizontal" role="form"  ng-init = init()>
+<!--FORM  ng-submit="AddProfile()"  ng-init = init()-->
+            <form  novalidate id = "profileForm" class="form-horizontal" role="form"  >
                 <fieldset>
                 <div class="form-group">
                     <!--<label for = "Name" class="col-lg-3 control-label">Name </label>-->
                     <label class="col-lg-3 control-label">Name: </label>
                     <div class="col-lg-8">
                         <!--<input id = "Name" class="form-control" value="Ashwini" type="text">-->
-                        <input type="text" class="form-control" ng-model="user.Name" value="your Name" >
+                        <!--input type="text" class="form-control" ng-model="user.Name" value=" " >-->
+                        <input type="text" class="form-control" ng-model="user.Name"  ng-disabled= "disableEdit">
 
                     </div>
                 </div>
@@ -54,7 +56,7 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Interests: </label>
                     <div class="col-lg-8">
-                        <input type="text" class="form-control" ng-model="user.Interests" value="Volleyball, Swimming" >
+                        <input type="text" class="form-control" ng-model="user.Interests" value=" " ng-disabled= "disableEdit">
                     </div>
                 </div>
 
@@ -65,35 +67,35 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Street:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ng-model="user.Street" value="160 Locksunart Way" type="text">
+                        <input class="form-control" ng-model="user.Street" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
                         <label class="col-lg-3 control-label">City:</label>
                         <div class="col-lg-8">
-                            <input class="form-control" ng-model="user.City" value="Sunnyvale" type="text">
+                            <input class="form-control" ng-model="user.City" value=" " type="text" ng-disabled= "disableEdit" >
                         </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">State:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ng-model="user.State" value="California" type="text">
+                        <input class="form-control" ng-model="user.State" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Country:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ng-model="user.Country" value="USA" type="text">
+                        <input class="form-control" ng-model="user.Country" value=" " type="text" ng-disabled= "disableEdit" >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Zip:</label>
                     <div class="col-lg-8">
-                        <input class="form-control" ng-model="user.Zip" value="94087" type="text">
+                        <input class="form-control" ng-model="user.Zip" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
@@ -103,14 +105,18 @@
                        <!-- The ngClick directive allows you to specify custom behavior when an element is clicked.-->
                         <!--<input type="submit" class="btn btn-primary" ng-click="update(name)" value="Submit" >
                          <input type="button" class="btn btn-default" ng-click="reset()" value="Reset" > -->
-                        <input type="submit" class="btn btn-primary" ng-click="update(user)" ng-disabled="editableForm.$waiting" value="Submit" >
-                        <input type="button" class="btn btn-default" ng-click="resetForm()" value="Reset" >
+                       <input type="submit" class="btn btn-primary" ng-click="update(user)" ng-disabled="!visibleSubmit" value="Submit" >
+                        <!--<input type="button" class="btn btn-default" ng-click="resetForm()" ng-disabled="!visibleReset" value="Reset" >-->
                     </div>
                 </div>
 
             </fieldset>
+                <!--
+                <pre> </pre> <li ng-repeat="item in list | filter:name">{{ item | json }}</li> </form> </pre>
                 <pre> form = {{user|json}}</pre>
                 <pre> master = {{master|json}}</pre>
+                -->
+
 
             </form>
 
