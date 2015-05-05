@@ -1,0 +1,53 @@
+<p>  Hello {{ name }}           <a ng-click="facebook_logout()">Log out</a></p>
+
+<div style="margin-top: 70px">
+        <h1 class="text-center" style="display: block">Welcome to FriendQuick!</h1>
+        <h2 class="text-center" style="margin-bottom: 50px; display: block">Search near by People with similar Interests!</h2>
+
+    <style type="text/css">
+
+        .bs-example{
+            margin: 20px;
+        }
+        /* Fix alignment issue of label on extra small devices in Bootstrap 3.2 */
+        .form-horizontal .control-label{
+            padding-top: 7px;
+        }
+    </style>
+    <div class="bs-example" ng-controller="searchController">
+        <form class="form-horizontal">
+            <div class="form-group">
+          <label for="zipcode" class="control-label col-xs-2">Zipcode</label>
+                <div class="col-xs-10">
+                    <input type="zipcode" ng-disabled="setMyCurrentLocation" class="form-control" id="zipcode" placeholder="Zipcode" ng-model="zipCode">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label><input type="checkbox" ng-model="setMyCurrentLocation" ng-change="setMyCurrentLocationClick()">Use My Current Location</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="radius" class="control-label col-xs-2">Radius</label>
+                <div class="col-xs-10">
+                    <input type="input" class="form-control" id="radius" placeholder="Radius of search" ng-model="radius">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="interest" class="control-label col-xs-2">Interest</label>
+                <div class="col-xs-10">
+                    <input type="interest" class="form-control" id="interest" placeholder="Interest">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                   <a ng-click="searchBtnClick()" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-search"></span> Search</a>   <!--href="#/search"-->
+                </div>
+            </div>
+
+        </form>
+
+       </div>
+    </div>

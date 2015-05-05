@@ -1,0 +1,19 @@
+<p> Hello {{ name }} <a ng-click="facebook_logout()">Log out</a></p>
+
+<div class="container-fluid"  ng-controller="resultsController">
+    <h1>Friends Nearby You!!</h1>
+
+    <li ng-repeat="user in users" style="list-style-type: none;margin-bottom: 5px;">
+        <div class="row" style="background-color:lavender;">
+            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong>{{user.$id}}</Strong></div>
+            <div class="col-sm-6 col-lg-4">1 miles away</div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-8">{{user.City}}, {{user.Zipcode}}</div>
+            <div class="col-sm-6 col-lg-4">
+                <a href="#/Friends">Add Friend</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-8">Interests: {{user.Interests}}</div>
+        </div>
+    </li>
+
+</div>

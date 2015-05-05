@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" ng-controller="LoginController">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -33,11 +33,11 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#/home">Home</a></li>
-        <li><a href="#/profile">Profile</a></li>
-        <li><a href="#/friends">Friends</a></li>
-        <li><a href="#/notifications">Notifications</a></li>
-        <li><a href="#/messages">Messages</a></li>
+        <li ng-show="showHeader" class="active"><a href="#/home">Home</a></li>
+        <li ng-show="showHeader"><a href="#/addProfile">Profile</a></li>
+        <li ng-show="showHeader"><a href="#/friends">Friends</a></li>
+        <li ng-show="showHeader"><a href="#/notifications">Notifications</a></li>
+        <li ng-show="showHeader"><a href="#/messages">Messages</a></li>
       </ul>
     </div>
   </div>
@@ -58,8 +58,8 @@
 
   <script src="/bower_components/angular/angular.js?ver="></script>
   <script src="/bower_components/angular-route/angular-route.js"></script>
-  <script src="https://cdn.firebase.com/js/client/2.0.4/firebase.js"></script>
-<script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
   <!--<script src="/bower_components/angular-cookies/angular-cookies.js"></script>-->
   <!--<script src="/bower_components/ngStorage/src/angularLocalStorage.js"></script>-->
   <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
@@ -71,6 +71,9 @@
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
   <script src="addProfile.js"></script>
+  <script src="views/search.js"></script>
+  <script src="views/results.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 
 
 

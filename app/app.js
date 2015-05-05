@@ -1,35 +1,33 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', ['ngRoute', 'QF_controllers' ])
+angular.module('myApp', ['ngRoute', 'firebase',
+    'QF_controllers',
+    'friendQuick.search', 'friendQuick.profile', 'friendQuick.results'])
 
 .config(['$routeProvider', function($routeProvider) {
 
     $routeProvider
 
         .when('/home', {
-            templateUrl: 'views/home.html',
+            templateUrl: 'views/search.html',
             controller: 'HomeCtrl'
         })
         .when('/login', {
             templateUrl: 'views/login.html',
-            controller: 'LoginCtrl'
+            controller: 'LoginController'
         })
-        .when('/nav', {
-            templateUrl: 'nav.html',
-            controller: 'HomeCtrl'
+        .when('/results', {
+            templateUrl: 'views/results.html',
+            controller: 'resultsController'
         })
         .when('/profile', {
             templateUrl: 'profile.html',
             controller: 'HomeCtrl'
         })
-        .when('/search', {
-            templateUrl: 'views/search.html'
-            //controller: 'HomeCtrl'
-        })
         .when('/addProfile', {
-            templateUrl: 'addProfile.html'
-            //controller: 'addProfileCtrl'
+            templateUrl: 'addProfile.html',
+            controller: 'addProfileCtrl'
         })
         .when('/contactinfo', {
             templateUrl: 'views/contactinfo.html'

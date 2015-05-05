@@ -5,6 +5,20 @@ angular.module('QF_controllers', ['ngRoute','firebase', 'ngStorage'])
 
 //.controller('LoginCtrl', ['$scope','userSession', '$location', '$rootScope','$firebaseAuth', 'Log_in_out',
 //        function($scope, userSession, $location, $rootScope, $firebaseAuth, Log_in_out) {
+
+    .controller('LoginController', ['$scope', '$rootScope', 'Log_in_out',
+        function ($scope, $rootScope, Log_in_out) {
+            $rootScope.$on('$routeChangeSuccess', function(ev,data) {
+                if (data) {
+                    $scope.showHeader = true;
+                    if (data.controller === 'LoginController') {
+                        $scope.showHeader = false;
+                    }
+                }
+            });
+            $scope.facebook_login = Log_in_out.facebook_login;
+        }])
+
 .controller('LoginCtrl', ['$scope', 'Log_in_out',
         function($scope, Log_in_out) {
 

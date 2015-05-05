@@ -2,15 +2,8 @@
  * Created by Ashwini on 4/18/2015.
  */
 'use strict';
-//inject angular file upload directives and services.
-angular.module("myApp",["ngRoute", "firebase"])
 
-    .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/addProfile', {
-            templateUrl: 'addProfile.html',
-            controller: 'addProfileCtrl'
-        });
-    }])
+angular.module('friendQuick.profile', [])
 
 //If it is own profile edit, submit, upload photo button are enabled but if it is just view profile are buttons should be disabled.
 .controller('addProfileCtrl', ["$scope", "$firebase", function($scope,  $firebase ) {
