@@ -6,7 +6,7 @@
 angular.module('friendQuick.profile', [])
 
 //If it is own profile edit, submit, upload photo button are enabled but if it is just view profile are buttons should be disabled.
-.controller('addProfileCtrl', ["$scope", "$firebase", function($scope,  $firebase ) {
+.controller('addProfileCtrl', ["$scope", "$firebaseArray", function($scope, $firebaseArray ) {
         // .controller('addProfileCtrl', ['$scope', function($scope) {
         // $scope.addProfile = function() {
         //$scope.master = {};
@@ -77,10 +77,8 @@ angular.module('friendQuick.profile', [])
                 var FirebaseURL ="https://quickfriend.firebaseio.com/";
                 var root = "users/";
                 var FirebaseRef = new Firebase(FirebaseURL);
-                var FirebaseUsrRef  = FirebaseRef.child (root);
-                var FirebaseSync = $firebase(FirebaseUsrRef);
+                var list = $firebaseArray(FirebaseRef);
 
-                var list =FirebaseSync.$asArray();
                 $scope.list = list;
                 //console.log(list);
                // Note that the data will not be available immediately since retrieving it is an asynchronous operation.

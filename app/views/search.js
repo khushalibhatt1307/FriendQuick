@@ -1,3 +1,7 @@
+/**
+ * Created by Khushali.
+ */
+
 angular.module('friendQuick.search', [])
 
     .controller('searchController', ['$scope', 'geoLocationService', '$http', 'dataService', 'userData', '$location',

@@ -1,3 +1,7 @@
+/**
+ * Created by Khushali.
+ */
+
 angular.module('friendQuick.results', [])
 
     .controller('resultsController', ['$scope', '$route', '$http', 'userData', function($scope, $route, $http, userData) {
