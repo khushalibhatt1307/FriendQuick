@@ -8,6 +8,7 @@ angular.module('friendQuick.results', [])
 
         $scope.zipCode = $route.current.params.zipCode;
         $scope.radius = $route.current.params.radius;
+        $scope.interest = $route.current.params.interest;
 
         //var url = 'http://www.zipcodeapi.com/rest/aFwqTj2BsiFtYMLkZaV6eCM6MU3JOhtYWZpQjsrMK6fJT04Sb0ZqCLwpGA8uRBtN/radius.json/' + $scope.zipCode + '/' + $scope.radius + '/mile';
         var url = 'https://www.zipwise.com/webservices/radius.php?key=yjauvgnvb9vezic0&zip=' + $scope.zipCode + '&radius=5&format=json';
@@ -16,7 +17,7 @@ angular.module('friendQuick.results', [])
             success(function (data, status, header, config) {
                 $scope.allZipCodesWithinRadius = data;
                 //var data = dataService.connectFireBase();
-                $scope.users = userData;
+                $scope.users = userData.getUserByInterests($scope.interest);
 
                 $scope.users.$loaded(function() {
                     /*angular.forEach($scope.users, function(user) {
@@ -34,16 +35,21 @@ angular.module('friendQuick.results', [])
 
 
     }])
-    .factory("userData", ["$firebaseArray",
-        function($firebaseArray) {
-            // create a reference to the Firebase where we will store our data
-            var ref = new Firebase("https://quickfriend.firebaseio.com/users/");
+    .factory('userData', ['$firebaseArray', function($firebaseArray) {
+        return{
+            getUserByInterests:function(userInterest){
+                // create a reference to the Firebase where we will store our data
+                var ref = new Firebase("https://quickfriend.firebaseio.com/users");
 
-            // this uses AngularFire to create the synchronized array
-            return $firebaseArray(ref);
+                // create a query finding user key based on entered interest
+                var query = ref.orderByChild("Interests").equalTo(userInterest);
+                // the $firebaseArray service properly handles Firebase queries as well
+                return $firebaseArray(query);
+            }
         }
-    ])
-    .service('dataService', ['$firebaseObject', function($firebaseObject) {
+    }])
+
+   .service('dataService', ['$firebaseObject', function($firebaseObject) {
         return {
             connectFireBase: function() {
                 var ref = new Firebase("https://quickfriend.firebaseio.com/");
