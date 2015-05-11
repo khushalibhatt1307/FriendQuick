@@ -1,0 +1,81 @@
+<p> Hello {{ name }} <a ng-click="facebook_logout()">Log out</a></p>
+
+<div  ng-controller ="viewProfileCtrl"  class="container" style="padding-top: 60px;">
+    <h1 class="page-header">View Profile</h1>
+    <div class="row" name="1">
+        <!-- left column -->
+        <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="text-center" name ="picDiv">
+                <img style="max-width: 80%; " alt="" ng-src="{{ newProfileImageData }}" ng-show="newProfileImageData" alt="image" ng-disabled= "disableEdit"/>
+            </div>
+        </div>
+        <!-- edit form column -->
+        <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+
+            <h3>Personal Info
+            </h3>
+
+            <!--FORM  ng-submit="AddProfile()"  ng-init = init()-->
+            <form  novalidate id = "profileForm" class="form-horizontal" role="form"  >
+                <fieldset>
+                    <div class="form-group">
+
+                        <label class="col-sm-3 control-label">Name: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control"  ng-model="Name" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Interests: </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" ng-model="Interests" value=" " ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Address:</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Street:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" ng-model="Street" value=" " type="text" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">City:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" ng-model="City" value=" " type="text" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">State:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" ng-model="State" value=" " type="text" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Country:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" ng-model="Country" value=" " type="text" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Zip:</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" ng-model="Zip" value=" " type="text" ng-disabled= "disableEdit">
+                        </div>
+                    </div>
+                </fieldset>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
