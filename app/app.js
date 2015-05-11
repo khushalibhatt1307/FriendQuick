@@ -8,7 +8,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', ['ngRoute', 'firebase',
     'QF_controllers',
-    'friendQuick.search', 'friendQuick.profile', 'friendQuick.results'])
+    'friendQuick.search', 'friendQuick.profile', 'friendQuick.viewProfile','friendQuick.results'])
 
 .config(['$routeProvider', function($routeProvider) {
 
@@ -33,6 +33,10 @@ angular.module('myApp', ['ngRoute', 'firebase',
         .when('/addProfile', {
             templateUrl: 'addProfile.html',
             controller: 'addProfileCtrl'
+        })
+        .when('/viewProfile/:selectedUserId', {
+            templateUrl: 'viewProfile.html',
+            controller: 'viewProfileCtrl'
         })
         .when('/contactinfo', {
             templateUrl: 'views/contactinfo.html'

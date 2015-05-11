@@ -5,7 +5,9 @@
 
     <li ng-repeat="user in users" style="list-style-type: none;margin-bottom: 5px;">
         <div class="row" style="background-color:lavender;">
-            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong>{{user.$id}}</Strong></div>
+            <!--<div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/{{viewProfilePath}}" />{{user.$id}}</a> </Strong></div> -->
+            <!--<div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a href= "#/viewProfile">{{user.$id}}</a> </Strong></div>-->
+            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/viewProfile/{{user.$id}}">{{user.$id}}</a> </Strong></div>
             <div class="col-sm-6 col-lg-4">1 miles away</div>
 
             <div class="col-xs-12 col-sm-6 col-lg-8">{{user.City}}, {{user.Zipcode}}</div>

@@ -77,10 +77,12 @@ angular.module('friendQuick.profile', [])
                 var FirebaseURL ="https://quickfriend.firebaseio.com/";
                 var root = "users/";
                 var FirebaseRef = new Firebase(FirebaseURL);
-                var list = $firebaseArray(FirebaseRef);
+                var FirebaseUsrRef  = FirebaseRef.child (root);
+                //var FirebaseSync = $firebase(FirebaseUsrRef);
+                var list = $firebaseArray(FirebaseUsrRef);
 
                 $scope.list = list;
-                //console.log(list);
+                console.log(list);
                // Note that the data will not be available immediately since retrieving it is an asynchronous operation.
                // You can use the $loaded() promise to get notified when the data has loaded.
                list.$loaded().then(function(array) {
@@ -147,9 +149,9 @@ angular.module('friendQuick.profile', [])
                },
                function(error) {
                    if (error) {
-                       //alert("Data could not be saved." + error);
+                       alert("Data could not be saved." + error);
                    } else {
-                      // alert("Data saved successfully.");
+                       alert("Data saved successfully.");
                    }
                });
            $scope.visibleSubmit = false;
