@@ -61,7 +61,7 @@ angular.module('friendQuick.profile', [])
        // });
         };
 
-        $scope.uploadFile();
+       // $scope.uploadFile();
         //enable edits
         $scope.editProfile = function() {
             $scope.disableEdit   = false;
@@ -73,7 +73,7 @@ angular.module('friendQuick.profile', [])
 
         function init() {
                //Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
-                var userId ="Ashwini@gmaildotcom";
+                var userId ="Mike@gmaildotcom";
                 var FirebaseURL ="https://quickfriend.firebaseio.com/";
                 var root = "users/";
                 var FirebaseRef = new Firebase(FirebaseURL);
@@ -86,7 +86,7 @@ angular.module('friendQuick.profile', [])
                // Note that the data will not be available immediately since retrieving it is an asynchronous operation.
                // You can use the $loaded() promise to get notified when the data has loaded.
                list.$loaded().then(function(array) {
-                var userId_got = list.$getRecord("Ashwini@gmaildotcom");
+                var userId_got = list.$getRecord("Mike@gmaildotcom");
                 console.log (userId_got);
                 if ( userId_got != null) {
                     $scope.visibleSubmit = false;
@@ -125,7 +125,7 @@ angular.module('friendQuick.profile', [])
            console.log($scope.user.Name);
 
            var ref = new Firebase("https://quickfriend.firebaseio.com/");
-           var userId = "Ashwini@gmaildotcom";
+           var userId = "Mike@gmaildotcom";
            var root = "users/";
            var usersRef  = ref.child (root.concat(userId));
            var Interests  = $scope.user.Interests;

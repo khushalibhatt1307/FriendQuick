@@ -34,6 +34,14 @@ angular.module('myApp', ['ngRoute', 'firebase',
             templateUrl: 'viewProfile.html',
             controller: 'viewProfileCtrl'
         })
+        .when('/firebase_practice', {
+            templateUrl: 'angularfire_practice.html',
+            controller: 'angularfire_practiceCtrl'
+        })
+        .when('/friends', {
+            templateUrl: 'views/friends.html',
+            controller: 'friendsCtrl'
+        })
         .otherwise({
             redirectTo: '/login'
         });
