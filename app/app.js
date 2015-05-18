@@ -8,7 +8,7 @@
 // Declare app level module which depends on views, and components
 angular.module('myApp', ['ngRoute', 'firebase',
     'QF_controllers',
-    'friendQuick.search', 'friendQuick.profile', 'friendQuick.viewProfile','friendQuick.results'])
+    'friendQuick.search', 'friendQuick.profile', 'friendQuick.viewProfile','friendQuick.blockUser','friendQuick.results' ])
 
 .config(['$routeProvider', function($routeProvider) {
 
@@ -34,13 +34,18 @@ angular.module('myApp', ['ngRoute', 'firebase',
             templateUrl: 'viewProfile.html',
             controller: 'viewProfileCtrl'
         })
+
+        .when('/blockUser/:selectedUserId', {
+            templateUrl: 'blockUser.html',
+            controller: 'blockUserCtrl'
+        })
         .when('/firebase_practice', {
             templateUrl: 'angularfire_practice.html',
             controller: 'angularfire_practiceCtrl'
         })
         .when('/friends', {
-            templateUrl: 'views/friends.html',
-            controller: 'friendsCtrl'
+            templateUrl: 'views/friends.html'
+            //controller: 'friendsCtrl'
         })
         .otherwise({
             redirectTo: '/login'
