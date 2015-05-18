@@ -4,8 +4,8 @@
 
 angular.module('friendQuick.search', [])
 
-    .controller('searchController', ['$scope', 'geoLocationService', '$http', 'dataService', 'userData', '$location',
-            function($scope, geoLocationService, $http, dataService, userData, $location) {
+    .controller('searchController', ['$scope', 'geoLocationService', '$location',
+            function($scope, geoLocationService, $location) {
         $scope.setMyCurrentLocation = false;
         $scope.setMyCurrentLocationClick = function() {
             var zipCode;
@@ -22,6 +22,7 @@ angular.module('friendQuick.search', [])
         $scope.searchBtnClick = function() {
             $location.search('zipCode', $scope.zipCode);
             $location.search('radius', $scope.radius);
+            $location.search('interest', $scope.interest);
             $location.path('/results');
         };
 

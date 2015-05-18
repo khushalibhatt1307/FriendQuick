@@ -14,7 +14,7 @@ angular.module('myApp', ['ngRoute', 'firebase',
 
     $routeProvider
 
-        .when('/home', {
+        .when('/search', {
             templateUrl: 'views/search.html',
             controller: 'HomeCtrl'
         })
@@ -26,10 +26,6 @@ angular.module('myApp', ['ngRoute', 'firebase',
             templateUrl: 'views/results.html',
             controller: 'resultsController'
         })
-        .when('/profile', {
-            templateUrl: 'profile.html',
-            controller: 'HomeCtrl'
-        })
         .when('/addProfile', {
             templateUrl: 'addProfile.html',
             controller: 'addProfileCtrl'
@@ -38,9 +34,13 @@ angular.module('myApp', ['ngRoute', 'firebase',
             templateUrl: 'viewProfile.html',
             controller: 'viewProfileCtrl'
         })
-        .when('/contactinfo', {
-            templateUrl: 'views/contactinfo.html'
-            //controller: 'HomeCtrl'
+        .when('/firebase_practice', {
+            templateUrl: 'angularfire_practice.html',
+            controller: 'angularfire_practiceCtrl'
+        })
+        .when('/friends', {
+            templateUrl: 'views/friends.html',
+            controller: 'friendsCtrl'
         })
         .otherwise({
             redirectTo: '/login'
