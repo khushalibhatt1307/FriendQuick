@@ -6,14 +6,16 @@
 angular.module('friendQuick.profile', [])
 
 //If it is own profile edit, submit, upload photo button are enabled but if it is just view profile are buttons should be disabled.
-.controller('addProfileCtrl', ["$scope", "$firebaseArray", function($scope, $firebaseArray ) {
+//Log_in_out,
+.controller('addProfileCtrl', ["$scope", "$rootScope", 'Log_in_out', "userSession", "$firebaseArray", function($scope, $rootScope, Log_in_out, userSession,$firebaseArray ) {
         // .controller('addProfileCtrl', ['$scope', function($scope) {
         // $scope.addProfile = function() {
         //$scope.master = {};
         $scope.visibleSubmit = true;
         $scope.visibleReset = true;
         $scope.disableEdit  = false;
-
+        console.log ("I am in add profile");
+        console.log (userSession.uid);
          function getPicture (onSuccess, onFail) {
             var input = document.createElement('input');
             input.type = 'file';
@@ -73,7 +75,8 @@ angular.module('friendQuick.profile', [])
 
         function init() {
                //Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
-                var userId ="Mike@gmaildotcom";
+                //var userId ="Mike@gmaildotcom";
+                var userId =userSession.uid;
                 var FirebaseURL ="https://quickfriend.firebaseio.com/";
                 var root = "users/";
                 var FirebaseRef = new Firebase(FirebaseURL);
@@ -86,7 +89,8 @@ angular.module('friendQuick.profile', [])
                // Note that the data will not be available immediately since retrieving it is an asynchronous operation.
                // You can use the $loaded() promise to get notified when the data has loaded.
                list.$loaded().then(function(array) {
-                var userId_got = list.$getRecord("Mike@gmaildotcom");
+                //var userId_got = list.$getRecord("Mike@gmaildotcom");
+                var userId_got = list.$getRecord(userId);
                 console.log (userId_got);
                 if ( userId_got != null) {
                     $scope.visibleSubmit = false;
@@ -125,7 +129,8 @@ angular.module('friendQuick.profile', [])
            console.log($scope.user.Name);
 
            var ref = new Firebase("https://quickfriend.firebaseio.com/");
-           var userId = "Mike@gmaildotcom";
+           //var userId = "Mike@gmaildotcom";
+           var userId = userSession.uid;
            var root = "users/";
            var usersRef  = ref.child (root.concat(userId));
            var Interests  = $scope.user.Interests;
@@ -168,5 +173,7 @@ angular.module('friendQuick.profile', [])
 
 
 }]);
+
+
 
 
