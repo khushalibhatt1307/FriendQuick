@@ -1,55 +1,17 @@
-<div class="container">
-    <br>
-    <h1><b>  My Friends</b></h1>
-    <br>
-    <div class="row">
-        <div class="span12">
-            <ul class="thumbnails">
+<div class="container-fluid" >
+    <h1>My Friends</h1>
 
+    <li ng-repeat="user in users" style="list-style-type: none;margin-bottom: 5px;">
+        <div class="row" style="background-color:lavender;">
+            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/viewProfile/{{user.id}}">{{user.name}}</a> </Strong></div>
 
-                <div class="thumbnail clearfix">
-
-                        <img src="http://placehold.it/100x100" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                        <div class="caption" class="pull-left">
-                            <a  class="btn btn-danger  btn-lg glyphicon glyphicon-ban-circle pull-right" ng-href="#/blockUser/Pranav.Bhatt@gmaildotcom" title="Block"></a>
-                            <!--<div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/blockUser/{{user.$id}}">{{user.Name}}</a> </Strong></div>-->
-                            <h4>
-                                <a href="#/viewProfile" >Pranav Bhatt</a>
-                            </h4>
-                        </div>
-
-                </div>
-
-
-
-                <div class="thumbnail clearfix">
-
-                        <img src="http://placehold.it/100x100" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                        <div class="caption" class="pull-left">
-                            <a  class="btn btn-danger  btn-lg glyphicon glyphicon-ban-circle pull-right" href="#" title="Block"></a>
-                            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/blockUser/{{user.$id}}">{{user.Name}}</a> </Strong></div>
-                            <h4>
-                                <a href="#/viewProfile" >Advait Chandrakant Nalage</a>
-                            </h4>
-                        </div>
-
-                </div>
-
-
-                <div class="thumbnail clearfix">
-
-                        <img src="http://placehold.it/100x100" alt="ALT NAME" class="pull-left span2 clearfix" style='margin-right:10px'>
-                        <div class="caption" class="pull-left">
-                            <a  class="btn btn-danger  btn-lg glyphicon glyphicon-ban-circle pull-right" href="#" title="Block"></a>
-                            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/blockUser/{{user.$id}}">{{user.Name}}</a> </Strong></div>
-                            <h4>
-                                <a href="#/viewProfile" >Charu Sharma</a>
-                            </h4>
-                        </div>
-
-                </div>
-
-               </ul>
+            <div class="col-xs-12 col-sm-6 col-lg-8">{{user.street}}<br>{{user.city}}, {{user.state}} {{user.zip}} {{user.country}}</div>
+            <div class="col-sm-6 col-lg-4">
+                <a id="blockFriendLink"  href="" ng-show="user.isFriend && !user.isBlockedFriend" ng-click="blockFriend(user)">Block Friend</a>
+                <a id="unBlockFriendLink"  href="" ng-show="user.isFriend && user.isBlockedFriend" ng-click="unBlockFriend(user)">Unblock Friend</a>
+                <a id="removeFriendLink"  href="" ng-show="user.isFriend || user.isBlockedFriend" ng-click="removeFriend(user)">Remove Friend</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-8">Interests: {{user.interest}}</div>
         </div>
-    </div>
+    </li>
 </div>

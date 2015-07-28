@@ -1,20 +1,18 @@
-<p> Hello {{ name }} <a ng-click="facebook_logout()">Log out</a></p>
-
 <div class="container-fluid" >
     <h1>Friends Nearby You!!</h1>
-
     <li ng-repeat="user in users" style="list-style-type: none;margin-bottom: 5px;">
         <div class="row" style="background-color:lavender;">
-            <!--<div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/{{viewProfilePath}}" />{{user.$id}}</a> </Strong></div> -->
-            <!--<div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a href= "#/viewProfile">{{user.$id}}</a> </Strong></div>-->
-            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/viewProfile/{{user.$id}}">{{user.Name}}</a> </Strong></div>
+            <div class="col-xs-12 col-sm-6 col-lg-8"><Strong> <a ng-href= "#/viewProfile/{{user.id}}">{{user.name}}</a> </Strong></div>
             <div class="col-sm-6 col-lg-4">{{user.distance}} miles away</div>
 
-            <div class="col-xs-12 col-sm-6 col-lg-8">{{user.Street}}<br>{{user.City}}, {{user.State}} {{user.Zip}} {{user.Country}}</div>
+            <div class="col-xs-12 col-sm-6 col-lg-8">{{user.street}}<br>{{user.city}}, {{user.state}} {{user.zip}} {{user.country}}</div>
             <div class="col-sm-6 col-lg-4">
-                <a href="#/Friends">Add Friend</a>
+                <a id="addFriendLink"  href="" ng-show="!user.isFriend && !user.isBlockedFriend" ng-click="addFriend(user)">Add Friend</a>
+                <a id="blockFriendLink"  href="" ng-show="user.isFriend && !user.isBlockedFriend" ng-click="blockFriend(user)">Block Friend</a>
+                <a id="unBlockFriendLink"  href="" ng-show="user.isFriend && user.isBlockedFriend" ng-click="unBlockFriend(user)">Unblock Friend</a>
+                <a id="removeFriendLink"  href="" ng-show="user.isFriend || user.isBlockedFriend" ng-click="removeFriend(user)">Remove Friend</a>
             </div>
-            <div class="col-xs-12 col-sm-6 col-lg-8">Interests: {{user.Interests}}</div>
+            <div class="col-xs-12 col-sm-6 col-lg-8">Interests: {{user.interest}}</div>
         </div>
     </li>
 

@@ -4,7 +4,8 @@
 
 angular.module('friendQuick.results', [])
 
-    .controller('resultsController', ['$scope', '$route', '$http', 'userData', function($scope, $route, $http, userData) {
+    .controller('resultsController', ['$scope', '$route', '$http', 'userData', '$timeout', 'userSession', 'friendsService',
+        function($scope, $route, $http, userData, $timeout, userSession, friendsService) {
 
         $scope.zipCode = $route.current.params.zipCode;
         $scope.radius = $route.current.params.radius;
@@ -24,35 +25,60 @@ angular.module('friendQuick.results', [])
                     return;
                 }
                 var allAreasWithinRadius = data.results;
-                /*var allZipCodesWithinRadius = [];
-                for(var i=0; i<allAreasWithinRadius.length; i++) {
-                    allZipCodesWithinRadius.push(allAreasWithinRadius[i].zip);
-                }*/
+                //var allAreasWithinRadius  = [{"zip":"94536","city":"Fremont","state":"CA","distance":"0.0"},{"zip":"94537","city":"Fremont","state":"CA","distance":"1.6"},{"zip":"94587","city":"Union City","state":"CA","distance":"3.9"},{"zip":"94538","city":"Fremont","state":"CA","distance":"4.0"},{"zip":"94560","city":"Newark","state":"CA","distance":"4.5"},{"zip":"94555","city":"Fremont","state":"CA","distance":"4.9"}]
 
-                var usersByInterests = userData.getUserByInterests($scope.interest);
-                usersByInterests.$loaded(function() {
-                    var filteredUsers = [];
-                    angular.forEach(usersByInterests, function (user) {
-                        /*var distance = $scope.isZipCodeWithingRadius(user.Zip, allAreasWithinRadius);
-                         if (distance !== -1) {
-                             user.distance = distance;
-                             filteredUsers.push(user);
-                         }*/
+                // get reference to firebase
+                var fb = new Firebase("https://friendquick.firebaseio.com/users");
+                var friendsFB = new Firebase("https://friendquick.firebaseio.com/friends");
 
-                        for(var i=0; i<allAreasWithinRadius.length; i++) {
-                            if(allAreasWithinRadius[i].zip === String(user.Zip)) {
-                                user.distance = allAreasWithinRadius[i].distance;
+                // get all user ids which interest matches
+                var userIdsByInterestQuery = fb.orderByChild('interest').equalTo($scope.interest);
+                var filteredUsers = [];
+
+                userIdsByInterestQuery.on('value', function(userIdsByInterestSnapShot) {
+                    userIdsByInterestSnapShot.forEach(function(userIdByInterest) {
+                        var user = userIdByInterest.val();
+                        user.id = userIdByInterest.key();
+
+                        if (user.id !== userSession.uid) { // don't show current logged in user
+                            friendsFB.child(userSession.uid + '/' + user.id).once('value', function (friendsSnapshot) {
+                                if (friendsSnapshot.val() !== undefined && friendsSnapshot.val() === true) {
+                                    user.isFriend = true;
+                                    user.isBlockedFriend = false;
+                                    // block friend
+
+                                } else if (friendsSnapshot.val() !== undefined && friendsSnapshot.val() === false) {
+                                    user.isFriend = true;
+                                    user.isBlockedFriend = true;
+                                    // unblock friend
+
+                                } else if(friendsSnapshot.val() === undefined) {
+                                    user.isBlockedFriend = false;
+                                    user.isFriend = false;
+                                    // add friend
+                                }
+                                for (var i = 0; i < allAreasWithinRadius.length; i++) {
+                                    if (allAreasWithinRadius[i].zip === String(user.zip)) {
+                                        user.distance = allAreasWithinRadius[i].distance;
+                                    }
+                                }
                                 filteredUsers.push(user);
-                            }
+                                $timeout(function() {
+                                    $scope.users = filteredUsers;
+                                });
+
+                            });
+
                         }
                     });
-                    //$scope.users = userData.getUserByInterests($scope.interest);
-                    $scope.users = filteredUsers;
                 });
+
+
             }).
             error(function (data, status, header, config) {
                 alert('Error fetching zip codes within radius');
             });
+
 
         $scope.isZipCodeWithingRadius = function(zipCode, allAreasWithinRadius) {
             for(var i=0; i<allAreasWithinRadius.length; i++) {
@@ -67,23 +93,54 @@ angular.module('friendQuick.results', [])
             }*/
         };
 
+        $scope.addFriend = function(user) {
+            friendsService.addFriend(user);
+        };
+
+        $scope.blockFriend = function(user) {
+            friendsService.blockFriend(user);
+        };
+
+        $scope.unBlockFriend = function(user) {
+            friendsService.unBlockFriend(user);
+        };
+
+        $scope.removeFriend = function(user) {
+            friendsService.removeFriend(user);
+        }
 
     }])
+
     .factory('userData', ['$firebaseArray', function($firebaseArray) {
+        function extend(base) {
+            var parts = Array.prototype.slice.call(arguments, 1);
+            parts.forEach(function (p) {
+                if (p && typeof (p) === 'object') {
+                    for (var k in p) {
+                        if (p.hasOwnProperty(k)) {
+                            base[k] = p[k];
+                        }
+                    }
+                }
+            });
+            return base;
+        }
         return{
-            getUserByInterests:function(userInterest){
+            // get all user ids of particular interest
+            // for each result of user, get user o
+            getUsersByInterests:function(userInterest){
                 // create a reference to the Firebase where we will store our data
-                var ref = new Firebase("https://quickfriend.firebaseio.com/users");
+                var ref = new Firebase("https://friendquick.firebaseio.com/users");
 
                 // create a query finding user key based on entered interest
-                var query = ref.orderByChild("Interests").equalTo(userInterest);
+                var query = ref.orderByChild("interest").equalTo(userInterest);
                 // the $firebaseArray service properly handles Firebase queries as well
                 return $firebaseArray(query);
             }
         }
     }])
 
-   .service('dataService', ['$firebaseObject', function($firebaseObject) {
+    .service('dataService', ['$firebaseObject', function($firebaseObject) {
         return {
             connectFireBase: function() {
                 var ref = new Firebase("https://quickfriend.firebaseio.com/");

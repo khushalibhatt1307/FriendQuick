@@ -6,14 +6,14 @@
 angular.module('friendQuick.profile', [])
 
 //If it is own profile edit, submit, upload photo button are enabled but if it is just view profile are buttons should be disabled.
-.controller('addProfileCtrl', ["$scope", "$firebaseArray", function($scope, $firebaseArray ) {
+.controller('addProfileCtrl', ["$scope", "$rootScope", 'Log_in_out', "userSession", "$firebaseArray", function($scope, $rootScope, Log_in_out, userSession,$firebaseArray ) {
         // .controller('addProfileCtrl', ['$scope', function($scope) {
         // $scope.addProfile = function() {
         //$scope.master = {};
         $scope.visibleSubmit = true;
         $scope.visibleReset = true;
         $scope.disableEdit  = false;
-
+        console.log (userSession.uid);
          function getPicture (onSuccess, onFail) {
             var input = document.createElement('input');
             input.type = 'file';
@@ -73,8 +73,8 @@ angular.module('friendQuick.profile', [])
 
         function init() {
                //Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
-                var userId ="Mike@gmaildotcom";
-                var FirebaseURL ="https://quickfriend.firebaseio.com/";
+                var userId =userSession.uid;
+                var FirebaseURL ="https://friendquick.firebaseio.com/";
                 var root = "users/";
                 var FirebaseRef = new Firebase(FirebaseURL);
                 var FirebaseUsrRef  = FirebaseRef.child (root);
@@ -86,20 +86,20 @@ angular.module('friendQuick.profile', [])
                // Note that the data will not be available immediately since retrieving it is an asynchronous operation.
                // You can use the $loaded() promise to get notified when the data has loaded.
                list.$loaded().then(function(array) {
-                var userId_got = list.$getRecord("Mike@gmaildotcom");
+                var userId_got = list.$getRecord(userId);
                 console.log (userId_got);
                 if ( userId_got != null) {
                     $scope.visibleSubmit = false;
                     $scope.visibleReset = false;
                     $scope.disableEdit = true;
-                    $scope.user.City = userId_got.City;
-                    $scope.user.Country = userId_got.Country;
-                    $scope.user.Interests = userId_got.Interests;
-                    $scope.user.State = userId_got.State  ;
-                    $scope.user.Street = userId_got.Street ;
-                    $scope.user.Zip = userId_got.Zip;
-                    $scope.user.Name = userId_got.Name;
-                    $scope.newProfileImageData =userId_got.imageData;
+                    $scope.user.City = userId_got.city;
+                    $scope.user.Country = userId_got.country;
+                    $scope.user.Interests = userId_got.interest;
+                    $scope.user.State = userId_got.state  ;
+                    $scope.user.Street = userId_got.street ;
+                    $scope.user.Zip = userId_got.zip;
+                    $scope.user.Name = userId_got.name;
+                    $scope.newProfileImageData =userId_got.profilePhoto;
                 } else {
                     //console.log("I am in else");
                     $scope.visibleSubmit = true;
@@ -124,8 +124,8 @@ angular.module('friendQuick.profile', [])
            $scope.master = angular.copy(user);
            console.log($scope.user.Name);
 
-           var ref = new Firebase("https://quickfriend.firebaseio.com/");
-           var userId = "Mike@gmaildotcom";
+           var ref = new Firebase("https://friendquick.firebaseio.com/");
+           var userId = userSession.uid;
            var root = "users/";
            var usersRef  = ref.child (root.concat(userId));
            var Interests  = $scope.user.Interests;
@@ -136,16 +136,14 @@ angular.module('friendQuick.profile', [])
            var Zip       = $scope.user.Zip;
            var imageData = $scope.newProfileImageData;
            usersRef.set({
-                //userName : {
-                   Name     : $scope.user.Name,
-                   Interests: Interests,
-                   Street   : Street,
-                   City     : City,
-                   State    : State,
-                   Country  : Country,
-                   Zip      :Zip,
-                   imageData : imageData
-                   // }
+                   name     : $scope.user.Name,
+                   interest : Interests,
+                   street   : Street,
+                   city     : City,
+                   state    : State,
+                   country  : Country,
+                   zip      : Zip,
+                   profilePhoto : imageData
                },
                function(error) {
                    if (error) {
@@ -154,6 +152,7 @@ angular.module('friendQuick.profile', [])
                        alert("Data saved successfully.");
                    }
                });
+
            $scope.visibleSubmit = false;
            $scope.visibleReset = false;
            $scope.disableEdit = true;
@@ -164,8 +163,6 @@ angular.module('friendQuick.profile', [])
             $scope.user = angular.copy($scope.master);
         };
         $scope.resetForm();
-
-
 
 }]);
 

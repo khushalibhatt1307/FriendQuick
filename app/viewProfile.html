@@ -1,7 +1,5 @@
-<p> Hello {{ name }} <a ng-click="facebook_logout()">Log out</a></p>
-
-<div  ng-controller ="viewProfileCtrl"  class="container" style="padding-top: 60px;">
-    <h1 class="page-header">View Profile</h1>
+<div  ng-controller ="viewProfileCtrl"  class="container">
+    <h1>View Profile</h1>
     <div class="row" name="1">
         <!-- left column -->
         <div class="col-md-4 col-sm-6 col-xs-12">
@@ -13,7 +11,9 @@
         <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
 
             <h3>Personal Info
+<!--
                 <input class="btn btn-primary"  value="Add Friend" ng-click="editProfile()" ng-disabled= "!disableEdit" type="button" style="float: right">
+-->
             </h3>
 
             <!--FORM  ng-submit="AddProfile()"  ng-init = init()-->

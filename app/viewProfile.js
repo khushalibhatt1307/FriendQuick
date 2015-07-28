@@ -17,7 +17,7 @@ angular.module('friendQuick.viewProfile', []).controller('viewProfileCtrl', ["$s
     function init() {
         //Paths must be non-empty strings and can't contain ".", "#", "$", "[", or "]"
         //var userId ="Ashwini@gmaildotcom";
-        var FirebaseURL ="https://quickfriend.firebaseio.com/";
+        var FirebaseURL ="https://friendquick.firebaseio.com/";
         var root = "users/";
         var FirebaseRef = new Firebase(FirebaseURL);
         var FirebaseUsrRef  = FirebaseRef.child (root);
@@ -33,14 +33,17 @@ angular.module('friendQuick.viewProfile', []).controller('viewProfileCtrl', ["$s
             console.log (userId_got);
             if ( userId_got != null) {
                 console.log("I am in if");
-                $scope.City = userId_got.City;
-                $scope.Country = userId_got.Country;
-                $scope.Interests = userId_got.Interests;
-                $scope.State = userId_got.State  ;
-                $scope.Street = userId_got.Street ;
-                $scope.Zip = userId_got.Zip;
-                $scope.Name = userId_got.Name;
-                $scope.newProfileImageData =userId_got.imageData;
+                $scope.City = userId_got.city;
+                $scope.Country = userId_got.country;
+                $scope.Interests = userId_got.interest;
+                $scope.State = userId_got.state  ;
+                $scope.Street = userId_got.street ;
+                $scope.Zip = userId_got.zip;
+                $scope.Name = userId_got.name;
+                if(userId_got.profilePhoto) {
+                    $scope.newProfileImageData =userId_got.profilePhoto;
+                }
+
             } else {
                 //console.log("I am in else");
                 $scope.City = "Your City";

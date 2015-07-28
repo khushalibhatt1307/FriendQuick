@@ -67,7 +67,7 @@ angular.module('QF_controllers', ['ngRoute','firebase', 'ngStorage'])
 
                 facebook_login: function(home){
                       auth.$authWithOAuthPopup('facebook',{remmenber:"none"}).then(function(authData){
-                          userSession.uid = authData.uid;
+                          userSession.uid = authData.facebook.id;
                           userSession.name = authData.facebook.displayName;
                           $location.path(home);
                       });
