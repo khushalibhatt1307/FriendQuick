@@ -5,14 +5,14 @@
         <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="text-center" name ="picDiv">
                <!--image upload-->
-                <h6 ng-hide="newProfileImageData"> Upload a Photo...   </h6>
+               <!-- <h6 ng-hide="newProfileImageData"> Upload a Photo...   </h6> -->
                 <!--accept="image/*" specify that the server accepts only image files in the file upload-->
                 <!--<input type="file"  ngf-select="" ng-model="ImageData" name="newProfileImageData" accept="image/*" class="text-center center-block well well-sm" required="">-->
                 <img style="max-width: 80%; " alt="" ng-src="{{ newProfileImageData }}" ng-show="newProfileImageData" alt="image" />
                 <span></span>
 
                 <!--ng-disabled="!picDiv.name.$valid"-->
-                <button  ng-click="uploadFile()" class="btn btn-primary"  ng-hide="disableEdit"> Upload Image</button>
+               <button  ng-click="uploadFile()" class="btn btn-primary"  ng-hide="disableEdit"> Upload Image</button>
             </div>
         </div>
         <!-- edit form column -->
@@ -27,8 +27,8 @@
                 <fieldset>
                 <div class="form-group">
                     <!--<label for = "Name" class="col-lg-3 control-label">Name </label>-->
-                    <label class="col-sm-3 control-label">Name: </label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">Name: </label>
+                    <div class="col-xs-8">
                         <!--<input id = "Name" class="form-control" value="Ashwini" type="text">-->
                         <!--input type="text" class="form-control" ng-model="user.Name" value=" " >-->
                         <input type="text" class="form-control" ng-model="user.Name"  ng-disabled= "disableEdit">
@@ -37,54 +37,54 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Interests: </label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">Interests: </label>
+                    <div class="col-xs-8">
                         <input type="text" class="form-control" ng-model="user.Interests" value=" " ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Address:</label>
+                    <label class="col-xs-3 control-label">Address:</label>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Street:</label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">Street:</label>
+                    <div class="col-xs-8">
                         <input class="form-control" ng-model="user.Street" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
-                        <label class="col-sm-3 control-label">City:</label>
-                        <div class="col-sm-8">
+                        <label class="col-xs-3 control-label">City:</label>
+                        <div class="col-xs-8">
                             <input class="form-control" ng-model="user.City" value=" " type="text" ng-disabled= "disableEdit" >
                         </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">State:</label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">State:</label>
+                    <div class="col-xs-8">
                         <input class="form-control" ng-model="user.State" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Country:</label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">Country:</label>
+                    <div class="col-xs-8">
                         <input class="form-control" ng-model="user.Country" value=" " type="text" ng-disabled= "disableEdit" >
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">Zip:</label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label">Zip:</label>
+                    <div class="col-xs-8">
                         <input class="form-control" ng-model="user.Zip" value=" " type="text" ng-disabled= "disableEdit">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"></label>
-                    <div class="col-sm-8">
+                    <label class="col-xs-3 control-label"></label>
+                    <div class="col-xs-8">
                        <!-- The ngClick directive allows you to specify custom behavior when an element is clicked.-->
                         <!--<input type="submit" class="btn btn-primary" ng-click="update(name)" value="Submit" >
                          <input type="button" class="btn btn-default" ng-click="reset()" value="Reset" > -->
